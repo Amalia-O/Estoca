@@ -11,8 +11,8 @@ U1 = np.random.uniform(0, 1, N)
 U2 = np.random.uniform(0, 1, N)
 
 # Aplicar la transformación inversa
-Z1 = ( -2 * np.log(U) )**(1/2) * np.cos(2 * np.pi * U1)
-Z2 = ( -2 * np.log(U) )**(1/2) * np.sin(2 * np.pi * U2)
+Z1 = ( -2 * np.log(U1) )**(1/2) * np.cos(2 * np.pi * U2)
+Z2 = ( -2 * np.log(U1) )**(1/2) * np.sin(2 * np.pi * U2)
 
 # Estime la media y varianza de Z1 y Z2 y grafique los histogramas correspondientes. Realice tambi´en
 # un gr´afico de dispersi´on (scatter plot) de Z2 versus Z1 y calcule el coeficiente de correlaci´on
@@ -45,12 +45,14 @@ N = 10000
 U1 = np.random.uniform(0, 1, N)
 U2 = np.random.uniform(0, 1, N)
 U3 = np.random.uniform(0, 1, N)
+U4 = np.random.uniform(0, 1, N)
 
 # Aplicar la transformación inversa
-Z1 = ( -2 * np.log(U) )**(1/2) * np.cos(2 * np.pi * U1)
-Z2 = ( -2 * np.log(U) )**(1/2) * np.sin(2 * np.pi * U2)
-Z3 = ( -2 * np.log(U) )**(1/2) * np.cos(2 * np.pi * U3)
+Z1 = ( -2 * np.log(U1) )**(1/2) * np.cos(2 * np.pi * U2)
+Z2 = ( -2 * np.log(U1) )**(1/2) * np.sin(2 * np.pi * U2)
 
+Z3 = ( -2 * np.log(U3) )**(1/2) * np.cos(2 * np.pi * U4)
+Z4 = ( -2 * np.log(U3) )**(1/2) * np.sin(2 * np.pi * U4)
 # X =rho Z + mu , Z∼ N(0; 1) → X ∼ N(µ; σ2)
 
 X1 = 2**(1/2) * Z1
