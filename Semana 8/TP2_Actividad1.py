@@ -72,5 +72,3 @@ plt.show()
 # Graficando histograma
 plt.hist(cuentas_N_T, bins=20, density=True, color = 'peachpuff',  edgecolor ='lightsalmon')
 plt.show()
-
-plt.show()
