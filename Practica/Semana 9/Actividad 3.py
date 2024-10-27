@@ -1,39 +1,37 @@
-# Generar una aproximación del proceso de Poisson con λ=0.5 arribos por segundo,
-# a partir de un proceso Bernoulli. Tomar un intervalo de T=10 segundos y dividirlo
-# en n=1000 intervalos. Simular 2000 realizaciones del proceso
+# Sean A y B dos variables aleatorias independientes con distribución U(0,1). Se define la
+# siguiente función x(t) = At + B, con 0 <= t < 2. Suponiendo que se trata de un proceso
+# continuo muestreado a una tasa Ts = 0.01. Generando 1000 realizaciones, estime la media y varianza en función del tiempo t (𝜇(t) y 𝜎2(t)),
+# superponiendo las realizaciones a la media estimada 𝜇(t). Aparte grafique la varianza 𝜎2(t)
 
-import numpy as np
-import matplotlib.pyplot as plt
-plt.style.use('seaborn-white')
+Ts = 0.01
+t = np.arange(0, 2, Ts)  # 0 <= t < 2 con pasos de 0.01
+num_realizaciones = 1000
+realizaciones = np.zeros((num_realizaciones, len(t)))
 
-T = 10
-n = 1000
-intervalo = T/n
 
-#en cada intervalo podemos pensar que tiramos una moneda con psibilidad de cara p= λ*intervalo
-p = 0.5*intervalo
+for i in range(num_realizaciones):
+    A = np.random.uniform(0, 1)
+    B = np.random.uniform(0, 1)
+    realizaciones[i, :] = A * t + B
 
-#N(T) la cantidad de caras en el intervalo [0;T] : np = nλintervalo = λT.
-# calculo las 2000 realizaciones
 
-X = np.random.binomial(n , p, size = 2000)
+media_temporal = np.mean(realizaciones, axis=0)
+media_teorica = t / 2 + 0.5
 
-# Estimar la funcion de probabilidad de la cantidad de arribos en [0,T]. Comparar con la teórica
-
-Y_Teorica = np.random.poisson(lam = 5, size = 2000)
-
-kwargs = dict(histtype='stepfilled', alpha=0.3, density=True, bins=10, ec="k")
-
-plt.hist(X, **kwargs, label = "Aproximada")
-plt.hist(Y_Teorica, **kwargs, label = "Teorica")
-plt.legend(loc="upper right")
-plt.xlabel("Cantidad de arribos")
-plt.ylabel("Probabilidad")
+plt.figure()
+plt.grid()
+for i in range(num_realizaciones):
+    plt.plot(t, realizaciones[i, :], color="salmon", alpha=0.1)
+plt.plot(t, media_temporal, label="Media estimada", color="blue")
+plt.plot(t, media_teorica, label="Media teórica", color="red")
+plt.legend()
 plt.show()
 
-# Estimar la media y la varianza del proceso y comparar con la teorica
+varianza_temporal = np.var(realizaciones, axis=0)
+varianza_teorica = t**2 / 12 + 1 / 12
 
-print("La varianza teorica es", np.var(Y_Teorica))
-print("La varianza estimada es", np.var(X))
-print("La media teorica es", np.mean(Y_Teorica))
-print("La media estimada es", np.mean(X))
+plt.plot(varianza_temporal, label = "Varianza temporal", color = 'teal')
+plt.plot(varianza_teorica, color='tomato', label = "Varianza teorica")
+plt.grid()
+plt.legend()
+plt.show()
