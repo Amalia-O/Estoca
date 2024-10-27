@@ -70,5 +70,5 @@ plt.vlines(x, 0, stats.poisson.pmf(x, media), colors='lightsalmon', lw=1)
 plt.show()
 
 # Graficando histograma
-plt.hist(cuentas_N_T, bins=20, density=True, color = 'peachpuff',  edgecolor ='lightsalmon')
+plt.hist(cuentas_N_T, bins=8, density=True, color = 'peachpuff',  edgecolor ='lightsalmon')
 plt.show()
